@@ -6,9 +6,9 @@
     "configurations": [
         {
             "name": "cl.exe - Build and debug active file",
-            "type": "cppvsdbg",
+            "type": "cppdbg",
             "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+            "program": "${fileDirname}\\${fileBasenameNoExtension}",
             "args": ["<", "source.txt"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",

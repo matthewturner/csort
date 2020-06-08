@@ -1,10 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 typedef char InputString[65536];
 typedef char InputLine[10];
 typedef char * LinePtr;
+
+int cmpstr(void const *a, void const *b) { 
+    char const *aa = (char const *)a;
+    char const *bb = (char const *)b;
+
+    return strcmp(aa, bb);
+}
 
 int main()
 {
@@ -38,7 +46,7 @@ int main()
 
     fprintf(stdout, "Count: %d\n", counter);
 
-    qsort(lines, counter, 10, strcmp);
+    qsort(lines, counter, 10, cmpstr);
 
     fprintf(stdout, "Sorted!\n");
 

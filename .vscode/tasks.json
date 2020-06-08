@@ -4,19 +4,14 @@
         {
             "type": "shell",
             "label": "C/C++: cl.exe build active file",
-            "command": "cl.exe",
-            "args": [
-                "/Zi",
-                "/EHsc",
-                "/Fe:",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe",
-                "${file}"
+            "command": "/usr/bin/g++",
+            "args": ["-g", "${file}", "-o", "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "/usr/bin"
             },
             "problemMatcher": [
-                "$msCompile"
+                "$gcc"
             ],
             "group": {
                 "kind": "build",
