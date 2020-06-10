@@ -22,32 +22,31 @@ int main()
         ;
     input[i - 1] = '\0';
 
+    size_t bufferSize = 10;
+    InputLine * lines = (InputLine*)calloc(bufferSize, sizeof(InputLine));
     LinePtr linePtr = strtok(input, "\n\r");
-    LinePtr originalLinePtr = linePtr;
-    int counter = 0;
+
+    int index = 0;
     while (linePtr != NULL)
     {
-        // fprintf(stdout, "%s\n", linePtr);
+        strcpy(lines[index], linePtr);
         linePtr = strtok(NULL, "\n\r");
-        counter++;
+        index++;
+        if (index >= bufferSize)
+        {
+            bufferSize += 10;
+            lines = (InputLine*)realloc(lines, bufferSize);
+        }
     }
 
-    InputLine * lines = (InputLine*)calloc(counter, sizeof(InputLine));
+    qsort(lines, index, 10, cmpstr);
 
-    for(int i = 0; i < counter; i++)
-    {
-        strcpy(lines[i], originalLinePtr);
-        originalLinePtr++;
-    }
-
-    qsort(lines, counter, 10, cmpstr);
-
-    for(int i = 0; i < counter; i++)
+    for(int i = 0; i < index; i++)
     {
         fprintf(stdout, "%s\n", lines[i]);
     }
 
-    fprintf(stdout, "\n\n");
+    free(lines);
 }
 
 int cmpstr(void const *a, void const *b) { 
