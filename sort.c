@@ -7,12 +7,7 @@ typedef char InputString[65536];
 typedef char InputLine[10];
 typedef char * LinePtr;
 
-int cmpstr(void const *a, void const *b) { 
-    char const *aa = (char const *)a;
-    char const *bb = (char const *)b;
-
-    return strcmp(aa, bb);
-}
+int cmpstr(void const *a, void const *b);
 
 int main()
 {
@@ -27,31 +22,37 @@ int main()
         ;
     input[i - 1] = '\0';
 
-    LinePtr linePtr = strtok(input, "\n");
+    LinePtr linePtr = strtok(input, "\n\r");
     LinePtr originalLinePtr = linePtr;
     int counter = 0;
     while (linePtr != NULL)
     {
-        fprintf(stdout, "%s\n", linePtr);
-        linePtr = strtok(NULL, "\n");
+        // fprintf(stdout, "%s\n", linePtr);
+        linePtr = strtok(NULL, "\n\r");
         counter++;
     }
 
     InputLine * lines = (InputLine*)calloc(counter, sizeof(InputLine));
+
     for(int i = 0; i < counter; i++)
     {
         strcpy(lines[i], originalLinePtr);
         originalLinePtr++;
     }
 
-    fprintf(stdout, "Count: %d\n", counter);
-
     qsort(lines, counter, 10, cmpstr);
-
-    fprintf(stdout, "Sorted!\n");
 
     for(int i = 0; i < counter; i++)
     {
         fprintf(stdout, "%s\n", lines[i]);
     }
+
+    fprintf(stdout, "\n\n");
+}
+
+int cmpstr(void const *a, void const *b) { 
+    char const *aa = (char const *)a;
+    char const *bb = (char const *)b;
+
+    return strcmp(aa, bb);
 }
